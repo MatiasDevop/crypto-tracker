@@ -16,6 +16,7 @@ import { CoinDetailComponent } from './coin-detail/coin-detail.component';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatSortModule} from '@angular/material/sort';
+import { NgChartsModule } from 'ng2-charts';
 
 
 
@@ -38,7 +39,8 @@ import {MatSortModule} from '@angular/material/sort';
     DatePipe,
     MatTableModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    NgChartsModule
     
   ],
   // exports:[
