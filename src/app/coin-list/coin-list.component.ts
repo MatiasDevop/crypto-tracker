@@ -3,6 +3,7 @@ import { ApiService } from '../services/api.service';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-coin-list',
@@ -21,7 +22,7 @@ export class CoinListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private api: ApiService) { 
+  constructor(private api: ApiService, private router: Router) { 
   }
 
   ngOnInit(): void{
@@ -57,6 +58,9 @@ export class CoinListComponent implements OnInit {
     }
   }
 
+  goToDetail(row: any){
+    this.router.navigate(['coin-detail', row.id])
+  }
 
 
 }
