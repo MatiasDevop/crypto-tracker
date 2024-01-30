@@ -43,13 +43,6 @@ import { NgChartsModule } from 'ng2-charts';
     NgChartsModule
     
   ],
-  // exports:[
-  //   MatToolbarModule,
-  //   MatSelectModule,
-  //   MatFormFieldModule,
-  //   MatInputModule
-  // ],
-
   providers:[],
   bootstrap: [AppComponent]
 })

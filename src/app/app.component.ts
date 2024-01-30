@@ -7,6 +7,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input'
 import { FormsModule } from '@angular/forms';
+import { CurrencyService } from './services/currency.service';
 
 @Component({
   selector: 'app-root',
@@ -19,14 +20,13 @@ import { FormsModule } from '@angular/forms';
 export class AppComponent {
   title = 'crypto-tracker';
   selectedCurrency: string = "EUR";
-  /**
-   *
-   */
-  constructor() {
+  
+  constructor(private currencyService: CurrencyService) {
     
   }
 
   sendCurrency(event: string){
     console.log(event);
+    this.currencyService.setCurrency(event)
   }
 }

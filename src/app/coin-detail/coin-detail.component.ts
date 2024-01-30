@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { CurrencyService } from '../services/currency.service';
 import { ApiService } from '../services/api.service';
 import { ActivatedRoute } from '@angular/router';
 
 import { ChartConfiguration, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts'; 
+
 
 @Component({
   selector: 'app-coin-detail',
@@ -48,7 +50,9 @@ export class CoinDetailComponent implements OnInit {
   public lineChartType: ChartType = 'line';
   @ViewChild(BaseChartDirective) myLineChart!: BaseChartDirective;
 
-  constructor(private api: ApiService, private activatedRoute: ActivatedRoute) {
+  constructor(private api: ApiService, 
+    private activatedRoute: ActivatedRoute,
+    private currencyService: CurrencyService) {
     
   }
   ngOnInit(): void {
@@ -56,22 +60,35 @@ export class CoinDetailComponent implements OnInit {
       this.coinId = val['id'];
     })
     this.getCoinData();
-    this.getGraphData();
+    this.getGraphData(this.days);
+    this.currencyService.getCurrency()
+      .subscribe(val => {
+        this.currency = val;
+        this.getGraphData(this.days);
+        this.getCoinData();
+      })
   }
 
   getCoinData(){
     this.api.getCurrencyById(this.coinId).subscribe(res =>{
-      this.coinData = res;
       console.log(this.coinData);
+      if (this.currency === "USD") {
+        res.market_data.current_price.eur = res.market_data.current_price.usd;
+        res.market_data.market_cap.eur = res.market_data.market_cap.usd;
+      }
+      res.market_data.current_price.eur = res.market_data.current_price.eur;
+      res.market_data.market_cap.eur = res.market_data.market_cap.eur;
+      this.coinData = res;
     })
   }
 
-  getGraphData(){
-    this.api.getGrpahicalCurrencyData(this.coinId, "USD", 30)
+  getGraphData(days: number){
+    this.days = days;
+    this.api.getGrpahicalCurrencyData(this.coinId, this.currency, this.days)
     .subscribe(res => {
       setTimeout(() =>{
         this.myLineChart.chart?.update();
-      })
+      }, 200)
       this.lineChartData.datasets[0].data = res.prices.map((a: any) =>{
           return a[1];
       });
