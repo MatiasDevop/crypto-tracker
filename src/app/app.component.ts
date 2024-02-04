@@ -21,30 +21,11 @@ import { concatMap, delay, from, map, mergeMap, of, switchMap } from 'rxjs';
 export class AppComponent implements OnInit{
   title = 'crypto-tracker';
   selectedCurrency: string = "EUR";
-  
-  // understanting map
-  foo$ = from([1,2,3,4,5]).pipe(map((item) => item * 10));
 
   constructor(private currencyService: CurrencyService) {
-    const example = (operator: any) => () => {
-      from([0,1,2,3,4])
-        .pipe(operator((x: any) => of(x).pipe(delay(500))))
-        .subscribe({
-          next: (v) => console.log(v), //res
-          error: (e) => console.error(e), //err
-          complete: () => console.log(`${operator.name} completed`)//completed
-        });
-    };
-
-    //example(mergeMap)();
-    example(concatMap)();
-    //example(switchMap)();
   }
 
-
   ngOnInit(): void {
-    //this.foo$.subscribe(console.log);
-    //console.log(this.foo$);
   }
 
   sendCurrency(event: string){
