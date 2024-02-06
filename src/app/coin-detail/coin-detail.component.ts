@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { CurrencyService } from '../services/currency.service';
 import { ApiService } from '../services/api.service';
 import { ActivatedRoute } from '@angular/router';
-
 import { ChartConfiguration, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts'; 
 
