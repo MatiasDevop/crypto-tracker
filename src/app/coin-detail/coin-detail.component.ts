@@ -5,11 +5,8 @@ import { ActivatedRoute } from '@angular/router';
 import { ChartConfiguration, ChartType } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts'; 
 
-
 @Component({
   selector: 'app-coin-detail',
-  // standalone: true,
-  // imports: [],
   templateUrl: './coin-detail.component.html',
   styleUrls: ['./coin-detail.component.scss']
 })
